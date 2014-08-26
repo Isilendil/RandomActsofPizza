@@ -1,0 +1,42 @@
+---
+title: "exploratoryAnalysis1"
+author: "isilendil"
+date: "2014.08.26."
+output: pdf_document
+---
+
+### load data
+```{r}
+library(rjson)
+train <-  fromJSON(file = "~/Kaggle/RandomActsofPizza/data/train.json")
+test <- fromJSON(file = "~/Kaggle/RandomActsofPizza/data/test.json")
+```
+
+### look at the data
+```{r}
+typeof(train)
+typeof(test)
+length(train)
+length(test)
+str(train[[1]])
+str(test[[1]])
+```
+
+### data convertion
+remove requester_subreddits_at_request variable which is a list
+```{r}
+train <- sapply(train, FUN = function(x) { x[-24] })
+test <- sapply(train, FUN = function(x) { x[-12] })
+```
+
+convert to data.table
+```{r}
+train <-as.data.table(t(train))
+test <-as.data.table(t(test))
+```
+
+
+
+
+
+
